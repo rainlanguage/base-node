@@ -265,6 +265,13 @@ sudo docker compose up -d --build
 sudo docker logs --since 100s execution
 sudo docker logs --since 100s consensus
 ```
+
+check pipeline stages progress:
+```bash
+sudo docker logs execution | grep -i "pipeline_stages"
+sudo docker logs consensus | grep -i "pipeline_stages"
+```
+
 and check for errors in them:
 
 ```bash
@@ -311,7 +318,7 @@ jq -r .result.unsafe_l2.timestamp))/60)) minutes
 The node metrics are exposed on `19090` port and rpc metrics on `13100` with known api keys and can be set in grafana with prometheus data source and some pre built reth dashboard that can be found in `grafana` folder.
 
 ---
-Section below is original Documentation
+The section below is original Documentation
 ---
 
 ## Quick Start
