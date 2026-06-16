@@ -14,7 +14,7 @@ if [[ -z "${SNAPSHOT_EXT_DIR:-}" ]]; then
   exit 1
 fi
 
-LATEST_SNAPSHOT=$(curl -s https://mainnet-reth-pruned-snapshots.base.org/latest)
+LATEST_SNAPSHOT=$(curl -s https://mainnet-reth-$SNAPSHOT_TYPE-snapshots.base.org/latest)
 echo "Latest snapshot: $LATEST_SNAPSHOT"
 
 if [[ -z "${LATEST_SNAPSHOT:-}" ]]; then
@@ -25,7 +25,7 @@ fi
 # download the pruned snapshot using aria2
 echo "Step 1: downloading snapshot..."
 apt install -y aria2
-aria2c -c -x 16 -s 16 -d $SNAPSHOT_DL_DIR "https://mainnet-reth-pruned-snapshots.base.org/$LATEST_SNAPSHOT"
+aria2c -c -x 16 -s 16 -d $SNAPSHOT_DL_DIR "https://mainnet-reth-$SNAPSHOT_TYPE-snapshots.base.org/$LATEST_SNAPSHOT"
 echo "Snapshot downloaded to $SNAPSHOT_DL_DIR"
 
 sleep 20
