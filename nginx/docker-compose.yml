@@ -3,6 +3,7 @@ services:
   loki:
     image: grafana/loki:2.9.0
     container_name: loki
+    restart: unless-stopped
     logging:
       driver: local
       options:
@@ -18,6 +19,7 @@ services:
   promtail:
     image: grafana/promtail:2.9.0
     container_name: promtail
+    restart: unless-stopped
     logging:
       driver: local
       options:
