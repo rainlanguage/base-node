@@ -10,7 +10,7 @@ Base is a secure, low-cost, developer-friendly Ethereum L2 built on Optimism's [
 [![Twitter Base](https://img.shields.io/twitter/follow/Base?style=social)](https://x.com/Base)
 [![Farcaster Base](https://img.shields.io/badge/Farcaster_Base-3d8fcc)](https://farcaster.xyz/base)
 
-# Deploying Base Reth Pruned Node Guide
+# Deploying Base Reth Node Guide
 
 ## Minimum Requirements
 - Modern Multicore CPU 8+ cores (recommended 16+ cores)
@@ -213,10 +213,13 @@ BASE_NODE_L1_BEACON=<your-preferred-l1-beacon>
 BASE_NODE_L2_ENGINE_AUTH_RAW=<your-jwt-32-bytes-hex-secrete>
 ```
 
-- configure the general `.env` (specify snapshot dl and extraction directories if you are starting the node from a snapshot):
+- configure the general `.env` (specify snapshot download and extraction directories if you are starting the node from a snapshot):
 ```env
 # dir for node data
 HOST_DATA_DIR=./reth-data
+
+# snapshot type, either of "archive" or "pruned" (default pruned)
+SNAPSHOT_TYPE=pruned
 
 # absolute path to where snapshot tar willbe downloaded to
 SNAPSHOT_DL_DIR=
@@ -242,7 +245,7 @@ and then in `tmux` session:
 ```sh
 sudo ./snapshot.sh
 ```
-this downloads the latest pruned snapshot and unpacks it into specified directories and then starts the the node dcoker compose.
+this downloads the latest snapshot and unpacks it into specified directories and then starts the the node dcoker compose.
 
 for detaching from `tmux`: Ctrl + B, then D
 for reattaching to the tmux session:
