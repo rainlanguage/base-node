@@ -152,26 +152,15 @@ git clone https://github.com/rainlanguage/base-node.git /path/to/repo
 cd /path/to/repo
 ```
 
-- generate api key (as many as u wish) for rpc and put them in `./nginx/api_keys.map`:
+- generate api key (as many as u wish) with running:
 ```sh
-openssl rand -hex 32
+./gen-apikey.sh add <name> "<comment>"
 ```
 
+delete api keys with:
 ```sh
-sudo nano ./nginx/api_keys.map
-```
-
-example:
-```txt
-# Maps API-KEY arg to a valid flag
-map $arg_apikey $valid_key {
-    default 0;    # deny by default
-    d601800e8321fcd5884921e52bee932fd1d6f433f8933df5922441f649dde756 1; # admin key
-    7b96008e7ba2aecd523db06e0ddf315b1f271ec361f08e9cff5efca61f879c35 1; # user key
-    .
-    .
-    .
-}
+./gen-apikey.sh list # first list the numbered keys
+./gen-apikeys.sh del 2
 ```
 
 - enable and link the nginx rpc config:
