@@ -32,7 +32,7 @@ add_key() {
         exit 1
     fi
 
-    local key="${name}-$(openssl rand 22 -hex)"
+    local key="${name}-$(openssl rand -hex 22)"
 
     # prevent duplicates
     if grep -q "^${key} " "$FILE"; then
