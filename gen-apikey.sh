@@ -13,7 +13,7 @@ touch "$DELETED_FILE"
 
 usage() {
     echo "Usage:"
-    echo "  $0 add <name> <hex> <comment>"
+    echo "  $0 add <name> <comment>"
     echo "  $0 del <line_number>"
     echo "  $0 list"
     exit 1
@@ -104,8 +104,8 @@ list_keys() {
 
 case "${1:-}" in
     add)
-        [[ $# -lt 3 ]] && usage
-        add_key "$2" "$3"
+        [[ $# -lt 2 ]] && usage
+        add_key "$2" "${3:-"no comment"}"
         ;;
     del)
         [[ $# -lt 2 ]] && usage
