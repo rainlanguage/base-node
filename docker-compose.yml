@@ -1,13 +1,20 @@
 services:
+
   execution:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: execution
     restart: unless-stopped
+    logging:
+      driver: local
+      options:
+        max-size: "5G"
+        max-file: "5"
     ports:
-      - "8545:8545" # RPC
-      - "8546:8546" # websocket
-      - "7301:6060" # metrics
+      - "127.0.0.1:8545:8545" # RPC
+      - "127.0.0.1:8546:8546" # websocket
+      - "127.0.0.1:7301:6060" # metrics
       - "30303:30303" # P2P TCP
       - "30303:30303/udp" # P2P UDP
     command: ["bash", "./execution-entrypoint"]
@@ -15,19 +22,49 @@ services:
       - ${HOST_DATA_DIR:-./reth-data}:/data
     env_file:
       - ${NETWORK_ENV:-.env.mainnet} # Use .env.mainnet by default, override with .env.sepolia for testnet
+
   node:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: consensus
     restart: unless-stopped
+    logging:
+      driver: local
+      options:
+        max-size: "5G"
+        max-file: "5"
     depends_on:
       - execution
     ports:
-      - "7545:8545" # RPC
+      - "127.0.0.1:7545:9545" # RPC
       - "9222:9222" # P2P TCP
       - "9222:9222/udp" # P2P UDP
-      - "7300:7300" # metrics
-      - "6060:6060" # pprof
+      - "127.0.0.1:7300:7300" # metrics
+      - "127.0.0.1:6060:6060" # pprof
     command: ["bash", "./consensus-entrypoint"]
     env_file:
       - ${NETWORK_ENV:-.env.mainnet} # Use .env.mainnet by default, override with .env.sepolia for testnet
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    logging:
+      driver: local
+      options:
+        max-size: "1G"
+        max-file: "5"
+    depends_on:
+      - execution
+      - node
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=${PROM_RETENTION_TIME:-30d}"
+      - "--storage.tsdb.retention.size=${PROM_RETENTION_SIZE:-40GiB}"

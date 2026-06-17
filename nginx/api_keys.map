@@ -1,0 +1,7 @@
+# Maps API-KEY arg to a valid flag
+map $arg_apikey $valid_key {
+    default 0;    # deny by default
+    <key-1> 1; # comment for key 1
+    <key-2> 1; # comment for key 2
+    <key-3> 1; # comment for key 3
+}
