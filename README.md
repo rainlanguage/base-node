@@ -163,10 +163,10 @@ delete api keys with:
 ./gen-apikeys.sh del 2
 ```
 
-- enable and link the nginx rpc config:
+- enable and link the nginx rpc config (running from node repo dir):
 ```bash
-sudo ln -s ./nginx/rpc.conf /etc/nginx/sites-enabled/
-sudo ln -s ./nginx/api_keys.map /etc/nginx/
+sudo ln -s $(pwd)/nginx/rpc.conf /etc/nginx/sites-enabled/
+sudo ln -s $(pwd)/nginx/api_keys.map /etc/nginx/
 ```
 
 and test the config:
