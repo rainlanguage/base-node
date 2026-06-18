@@ -122,7 +122,7 @@
       "title": "Source (GitHub)",
       "tooltip": "View source file in repository",
       "type": "link",
-      "url": "https://github.com/paradigmxyz/reth/tree/main/etc/grafana/dashboards"
+      "url": "https://github.com/rainlanguage/base-node/tree/main/grafana/node"
     }
   ],
   "liveNow": false,
