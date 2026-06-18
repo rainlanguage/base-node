@@ -207,6 +207,9 @@ BASE_NODE_L2_ENGINE_AUTH_RAW=<your-jwt-32-bytes-hex-secrete>
 # dir for node data
 HOST_DATA_DIR=./reth-data
 
+# path to dir that keeps all CL node data
+HOST_CL_DATA_DIR=./consensus-data
+
 # snapshot type, either of "archive" or "pruned" (default pruned)
 SNAPSHOT_TYPE=pruned
 

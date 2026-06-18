@@ -40,6 +40,7 @@ sleep 20
 # move snapshot data to host data dir
 echo "Step 3: moving files..."
 mkdir -m 775 "$HOST_DATA_DIR"
+mkdir -m 775 "$HOST_CL_DATA_DIR"
 mv "$SNAPSHOT_EXT_DIR"/snapshots/mainnet/download/* "$HOST_DATA_DIR"
 echo "Snapshot moved to $HOST_DATA_DIR"
 
