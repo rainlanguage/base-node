@@ -23,6 +23,16 @@ validate_name() {
     [[ "$1" =~ ^[a-zA-Z0-9-]{1,9}$ ]]
 }
 
+nginx_safe_reload() {
+    if nginx -t; then
+        nginx -s reload
+        echo "🔄 nginx reloaded"
+    else
+        echo "❌ nginx config invalid, NOT reloaded"
+        exit 1
+    fi
+}
+
 add_key() {
     local name="$1"
     local comment="${2:-}"
@@ -44,6 +54,8 @@ add_key() {
 
     echo "✅ Added key:"
     echo "${key}"
+
+    nginx_safe_reload
 }
 
 delete_key() {
@@ -80,6 +92,8 @@ delete_key() {
 
     echo "🗑️ Deleted line $line"
     echo "$entry"
+
+    nginx_safe_reload
 }
 
 list_keys() {
