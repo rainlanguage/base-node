@@ -282,6 +282,11 @@ or you can check sysem for `oom` errors:
 sudo dmesg | grep -i kill
 ```
 
+potential disk bottleneck can be monitored via:
+```sh
+iostat -xz 1
+```
+
 - Sync process may take some time (days), so be patiant but keep an eye on it and watch for possible errors and/or container restarts.
 
 - You can check if the L2 blocks are increasing by:
