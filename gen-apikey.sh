@@ -54,6 +54,7 @@ add_key() {
 
     echo "✅ Added key:"
     echo "${key}"
+    echo ""
 
     nginx_safe_reload
 }
@@ -92,6 +93,7 @@ delete_key() {
 
     echo "🗑️ Deleted line $line"
     echo "$entry"
+    echo ""
 
     nginx_safe_reload
 }
