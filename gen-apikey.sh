@@ -83,13 +83,17 @@ delete_key() {
     local entry
     entry=$(sed -n "${line}p" "$FILE")
 
-    # append to deleted file with timestamp
-    # echo "# deleted $(date -Is)" >> "$DELETED_FILE"
+    # append to deleted file
     echo "$entry" >> "$DELETED_FILE"
 
     # remove line
-    # sed -i "${line}d" "$FILE"
-    sed -i '' "${line}d" "$FILE"
+    if sed --version >/dev/null 2>&1; then
+        # GNU sed (Linux)
+        sed -i "${line}d" "$FILE"
+    else
+        # BSD sed (macOS)
+        sed -i '' "${line}d" "$FILE"
+    fi
 
     echo "🗑️ Deleted line $line"
     echo "$entry"
