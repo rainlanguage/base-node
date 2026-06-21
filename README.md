@@ -156,11 +156,19 @@ cd /path/to/repo
 ```sh
 ./gen-apikey.sh add <name> "<comment>"
 ```
+example:
+```sh
+./gen-apikey.sh add myapp "this is my app's key" # it will output a key like: "myapp-5ae25e03b774cc1c031e994edf09b10d03052d9a5621"
+```
 
 delete api keys with:
 ```sh
-./gen-apikey.sh list # first list the numbered keys
-./gen-apikeys.sh del 2
+./gen-apikey.sh list # first list the numbered keys:
+# 1) user1-ace5ccb821873eaf7227c379a0407dd0f6eb9fb247e1 1; # no comment
+# 2) myapp-5ae25e03b774cc1c031e994edf09b10d03052d9a5621; # this is my app's key
+# 3) user2-ab947bfd4c1ed927466cc401918219ef48addca50ae3 1; # user 2 comment
+
+./gen-apikeys.sh del 2 # delete the key with its number in the list
 ```
 
 - enable and link the nginx rpc config (running from node repo dir):
@@ -306,10 +314,10 @@ jq -r .result.unsafe_l2.timestamp))/60)) minutes
 
 # Using The Node RPC
 - HTTP URL
-`http://droplet-public-ip:18545/?apikey=<your-api-key>`
+`http://node-host-public-ip:18545/<your-api-key>`
 
 - WS URL
-`ws://droplet-public-ip:18546/?apikey=<your-api-key>`
+`ws://node-host-public-ip:18546/<your-api-key>`
 
 ## Setting up Grafana Monitor Dashboard
 The node metrics are exposed on `19090` port and rpc metrics on `13100` with known api keys and can be set in grafana with prometheus data source and some pre built reth dashboard that can be found in `grafana` folder.
