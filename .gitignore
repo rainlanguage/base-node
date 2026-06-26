@@ -2,3 +2,5 @@
 /reth-data/
 /dependency_updater/dependency_updater
 .DS_Store
+api_keys.map
+api_keys.deleted
