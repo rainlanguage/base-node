@@ -24,7 +24,6 @@ const StartTime = Date.now() - (3 * 24 * 60 * 60 * 1000)
 const state = new Map();
 
 /**
- * oldest → newest so messages stay in order
  * @typedef {{
  * title: string,
  * link: string,
@@ -33,7 +32,7 @@ const state = new Map();
  * contentSnippet: string,
  * guid: string,
  * isoDate: string
- * }} Feed
+ * }} Feed Type definition for a feed object
  */
 
 /**
