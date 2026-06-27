@@ -7,7 +7,7 @@ const BOT_TOKEN = process.env.RSS_BOT_TG_BOT_TOKEN;
 const CHANNEL_ID = process.env.RSS_BOT_TG_CHANNEL_ID;
 
 // default to 15 mins
-const POLL_INTERVAL = parseInt(process.env.RSS_BOT_POLL_INTERVAL || "0.25") * 60 * 60 * 1000;
+const POLL_INTERVAL = parseFloat(process.env.RSS_BOT_POLL_INTERVAL || "0.25") * 60 * 60 * 1000;
 
 // skip if env not set
 if (!process.env.RSS_BOT_TG_BOT_TOKEN || !process.env.RSS_BOT_TG_CHANNEL_ID || !process.env.RSS_BOT_URL) {
@@ -83,4 +83,15 @@ async function checkFeed() {
 }
 
 checkFeed();
-setInterval(checkFeed, POLL_INTERVAL);
+async function main() {
+  setInterval(checkFeed, POLL_INTERVAL);
+}
+
+main()
+    .then(() => {
+        process.exit(0);
+    })
+    .catch((v) => {
+        console.error(v, "\n");
+        process.exit(1);
+    });
