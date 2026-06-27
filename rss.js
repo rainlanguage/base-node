@@ -2,15 +2,15 @@ const Parser = require("rss-parser");
 const axios = require("axios");
 const crypto = require("crypto");
 
-const RSS_URL = process.env.RSS_URL;
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const CHANNEL_ID = process.env.CHANNEL_ID;
+const RSS_URL = process.env.RSS_BOT_URL;
+const BOT_TOKEN = process.env.RSS_BOT_TG_BOT_TOKEN;
+const CHANNEL_ID = process.env.RSS_BOT_TG_CHANNEL_ID;
 
 // default to 15 mins
-const POLL_INTERVAL = parseInt(process.env.POLL_INTERVAL || "0.25") * 60 * 60 * 1000;
+const POLL_INTERVAL = parseInt(process.env.RSS_BOT_POLL_INTERVAL || "0.25") * 60 * 60 * 1000;
 
 // skip if env not set
-if (!process.env.BOT_TOKEN || !process.env.CHANNEL_ID || !process.env.RSS_URL) {
+if (!process.env.RSS_BOT_TG_BOT_TOKEN || !process.env.RSS_BOT_TG_CHANNEL_ID || !process.env.RSS_BOT_URL) {
   console.log("env vars are required, skipping rss-bot.");
   process.exit(0);
 }

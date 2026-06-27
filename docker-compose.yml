@@ -77,7 +77,8 @@ services:
       dockerfile: Dockerfile.rss
     container_name: rss-bot
     environment:
-      - RSS_URL=${RSS_URL}
-      - BOT_TOKEN=${BOT_TOKEN}
-      - CHANNEL_ID=${CHANNEL_ID}
+      - RSS_BOT_URL=${RSS_BOT_URL}
+      - RSS_BOT_TG_BOT_TOKEN=${RSS_BOT_TG_BOT_TOKEN}
+      - RSS_BOT_TG_CHANNEL_ID=${RSS_BOT_TG_CHANNEL_ID}
+      - RSS_BOT_POLL_INTERVAL=${RSS_BOT_POLL_INTERVAL}
     restart: unless-stopped
