@@ -70,3 +70,14 @@ services:
       - "--storage.tsdb.path=/prometheus"
       - "--storage.tsdb.retention.time=${PROM_RETENTION_TIME:-30d}"
       - "--storage.tsdb.retention.size=${PROM_RETENTION_SIZE:-40GiB}"
+
+  rss-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.rss
+    container_name: rss-bot
+    environment:
+      - RSS_URL=${RSS_URL}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - CHANNEL_ID=${CHANNEL_ID}
+    restart: unless-stopped
