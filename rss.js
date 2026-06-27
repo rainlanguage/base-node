@@ -82,7 +82,7 @@ async function checkFeed() {
   }
 }
 
-function main() {
+async function main() {
   setInterval(checkFeed, POLL_INTERVAL);
 }
 
