@@ -5,6 +5,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-COPY index.js ./
+COPY rss.js ./
 
 CMD ["node", "rss.js"]
