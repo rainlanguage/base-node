@@ -57,7 +57,7 @@ async function checkFeed() {
     /**
      * @type {Array<Feed>}
      */
-    const feeds = [...result.items];
+    const feeds = [...result.items].reverse();
 
     for (const feed of feeds) {
         // skip if older than start time
