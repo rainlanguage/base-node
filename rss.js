@@ -82,15 +82,5 @@ async function checkFeed() {
   }
 }
 
-async function main() {
-  setInterval(checkFeed, POLL_INTERVAL);
-}
-
-main()
-    .then(() => {
-        process.exit(0);
-    })
-    .catch((v) => {
-        console.error(v, "\n");
-        process.exit(1);
-    });
+checkFeed();
+setInterval(checkFeed, POLL_INTERVAL);
